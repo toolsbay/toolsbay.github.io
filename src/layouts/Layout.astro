@@ -87,6 +87,16 @@ const breadcrumbSchema = {
     <meta name="theme-color" content="#FAF9F5" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#111310" media="(prefers-color-scheme: dark)" />
 
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-QFE564512Q"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-QFE564512Q');
+    </script>
+
     <!-- Anti-FOUC Theme Script: runs synchronously before DOM paint -->
     <script is:inline>
       (function() {
