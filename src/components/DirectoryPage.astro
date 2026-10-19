@@ -1,0 +1,201 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { ToolDirectory } from './ToolDirectory';
+import { TOOLS_CATALOG } from '../data/toolsCatalog';
+import { translations } from '../i18n/translations';
+
+interface Props {
+  currentLang?: string;
+}
+
+const { currentLang = 'en' } = Astro.props;
+const t = translations[currentLang] || translations.en;
+
+// Schema ItemList for SEO with all tools
+const schemaItemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  'name': t.siteTitle,
+  'description': t.siteDescription,
+  'numberOfItems': TOOLS_CATALOG.length,
+  'itemListElement': TOOLS_CATALOG.map((tool, index) => ({
+    '@type': 'ListItem',
+    'position': index + 1,
+    'item': {
+      '@type': 'SoftwareApplication',
+      'name': tool.name,
+      'description': tool.localizedDesc?.[currentLang as 'es'] || tool.desc,
+      'url': tool.url,
+      'applicationCategory': 'BrowserApplication',
+      'operatingSystem': 'Any (Web Browser)',
+      'offers': {
+        '@type': 'Offer',
+        'price': '0.00',
+        'priceCurrency': 'USD',
+      },
+    },
+  })),
+};
+
+// Schema FAQPage for SEO
+const schemaFaq = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': t.faqs.map((faq) => ({
+    '@type': 'Question',
+    'name': faq.question,
+    'acceptedAnswer': {
+      '@type': 'Answer',
+      'text': faq.answer,
+    },
+  })),
+};
+---
+
+<Layout currentLang={currentLang}>
+  <!-- Inject SEO Schemas into <head> -->
+  <Fragment slot="schema">
+    <script type="application/ld+json" set:html={JSON.stringify(schemaItemList)} />
+    <script type="application/ld+json" set:html={JSON.stringify(schemaFaq)} />
+  </Fragment>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 flex-grow w-full">
+    
+    <!-- Semantic Accessible Breadcrumbs -->
+    <nav aria-label="Breadcrumb" class="mb-6 flex items-center justify-center text-xs text-neutral-500 dark:text-neutral-400">
+      <ol class="inline-flex items-center space-x-1.5 sm:space-x-2">
+        <li>
+          <a href="/" class="hover:text-moss dark:hover:text-sand font-medium transition-colors">ToolsBay</a>
+        </li>
+        <li class="flex items-center">
+          <svg class="w-3 h-3 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+          <span class="ml-1.5 text-neutral-800 dark:text-neutral-200 font-semibold" aria-current="page">
+            {currentLang === 'en' ? 'Free Browser Tools' : t.categories.all}
+          </span>
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="text-center mb-10 sm:mb-14 max-w-3xl mx-auto">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sand-200/80 dark:bg-sand/15 text-olive-800 dark:text-sand text-xs font-bold mb-5 border border-sand-300/80 dark:border-sand/30 shadow-sm animate-fade-in">
+        <span>{t.heroBadge}</span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-900 dark:text-neutral-50 tracking-tight leading-[1.15] mb-5">
+        {t.heroTitle}
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="text-sm sm:text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed mb-6">
+        {t.heroSubtitle}
+      </p>
+
+      <!-- Trust Badges -->
+      <div class="flex items-center justify-center gap-4 sm:gap-6 flex-wrap text-xs font-semibold text-neutral-500 dark:text-neutral-400">
+        <div class="flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-moss dark:text-sand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+          </svg>
+          <span>No Server Uploads</span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-moss dark:text-sand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <span>Instant WebAssembly</span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-moss dark:text-sand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <span>100% Free Forever</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- React Island: Instant Search, Category Filter Pills & Pinned LocalStorage Bento Grid -->
+    <ToolDirectory client:load currentLang={currentLang} />
+
+    <!-- Privacy & Zero-Server Features Showcase -->
+    <section class="mt-20 sm:mt-28 pt-16 border-t border-light-border dark:border-dark-border">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-50 tracking-tight mb-3">
+          Why Zero-Server Browser Utilities?
+        </h2>
+        <p class="text-sm text-neutral-600 dark:text-neutral-400">
+          Traditional web tools upload your private files to remote cloud servers. ToolsBay operates entirely inside your device's browser memory.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Feature 1 -->
+        <div class="p-6 rounded-2xl bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border shadow-luxury-light dark:shadow-luxury-dark">
+          <div class="w-12 h-12 rounded-xl bg-sand-100 dark:bg-dark-card border border-sand-300/40 text-olive-800 dark:text-sand flex items-center justify-center text-xl mb-4">
+            🛡️
+          </div>
+          <h3 class="text-base font-bold text-neutral-900 dark:text-neutral-50 mb-2">
+            {t.features.zeroServerTitle}
+          </h3>
+          <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+            {t.features.zeroServerDesc}
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="p-6 rounded-2xl bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border shadow-luxury-light dark:shadow-luxury-dark">
+          <div class="w-12 h-12 rounded-xl bg-sage-100 dark:bg-dark-card border border-sage-300/40 text-moss dark:text-sage flex items-center justify-center text-xl mb-4">
+            🔓
+          </div>
+          <h3 class="text-base font-bold text-neutral-900 dark:text-neutral-50 mb-2">
+            {t.features.noSignupTitle}
+          </h3>
+          <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+            {t.features.noSignupDesc}
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="p-6 rounded-2xl bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border shadow-luxury-light dark:shadow-luxury-dark">
+          <div class="w-12 h-12 rounded-xl bg-moss-100 dark:bg-dark-card border border-moss-300/40 text-moss dark:text-sand flex items-center justify-center text-xl mb-4">
+            ⚡
+          </div>
+          <h3 class="text-base font-bold text-neutral-900 dark:text-neutral-50 mb-2">
+            {t.features.lightningFastTitle}
+          </h3>
+          <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+            {t.features.lightningFastDesc}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="mt-20 sm:mt-28 max-w-3xl mx-auto">
+      <div class="text-center mb-10">
+        <h2 class="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-50 tracking-tight mb-3">
+          {t.faqTitle}
+        </h2>
+      </div>
+
+      <div class="space-y-4">
+        {t.faqs.map((faq) => (
+          <article class="p-5 sm:p-6 rounded-2xl bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border hover:border-sand-300/60 dark:hover:border-sand/30 transition-colors shadow-sm">
+            <h3 class="text-sm sm:text-base font-bold text-neutral-900 dark:text-neutral-50 mb-2.5 flex items-center gap-2">
+              <span class="text-moss dark:text-sand font-mono">Q.</span>
+              <span>{faq.question}</span>
+            </h3>
+            <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed pl-5">
+              {faq.answer}
+            </p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+  </main>
+</Layout>

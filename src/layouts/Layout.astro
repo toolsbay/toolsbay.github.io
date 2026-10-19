@@ -1,0 +1,174 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { translations, SUPPORTED_LANGUAGES } from '../i18n/translations';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  currentLang?: string;
+}
+
+const { currentLang = 'en' } = Astro.props;
+const t = translations[currentLang] || translations.en;
+const currentLangConfig = SUPPORTED_LANGUAGES.find((l) => l.code === currentLang) || SUPPORTED_LANGUAGES[0];
+
+const title = Astro.props.title || t.siteTitle;
+const description = Astro.props.description || t.siteDescription;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://toolsbay.github.io');
+
+const siteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  'name': 'ToolsBay',
+  'alternateName': 'ToolsBay - 55+ Zero-Server Browser Utilities',
+  'url': 'https://toolsbay.github.io/',
+  'description': 'Master web directory organizing over 55 privacy-first, zero-server browser utilities. 100% client-side with zero data collection.',
+  'inLanguage': currentLang,
+  'potentialAction': {
+    '@type': 'SearchAction',
+    'target': {
+      '@type': 'EntryPoint',
+      'urlTemplate': 'https://toolsbay.github.io/?q={search_term_string}',
+    },
+    'query-input': 'required name=search_term_string',
+  },
+};
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  'name': 'ToolsBay',
+  'url': 'https://toolsbay.github.io/',
+  'logo': 'https://toolsbay.github.io/favicon.svg',
+  'image': 'https://toolsbay.github.io/og-image.png',
+  'description': 'Privacy-first zero-server browser tools directory suite.',
+  'founder': {
+    '@type': 'Person',
+    'name': 'Kishara',
+    'url': 'https://ko-fi.com/kishara',
+  },
+  'sameAs': [
+    'https://ko-fi.com/kishara',
+  ],
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': [
+    {
+      '@type': 'ListItem',
+      'position': 1,
+      'name': 'ToolsBay',
+      'item': 'https://toolsbay.github.io/',
+    },
+    {
+      '@type': 'ListItem',
+      'position': 2,
+      'name': currentLang === 'en' ? 'Tools Directory' : currentLangConfig.label,
+      'item': canonicalURL.toString(),
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang={currentLang} class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Theme Color Meta Tags -->
+    <meta name="theme-color" content="#FAF9F5" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#111310" media="(prefers-color-scheme: dark)" />
+
+    <!-- Anti-FOUC Theme Script: runs synchronously before DOM paint -->
+    <script is:inline>
+      (function() {
+        try {
+          const savedTheme = localStorage.getItem('toolsbay-theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    <!-- Primary SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content="free browser tools, zero server web tools, private online utilities, audio cutter, pdf editor, video merger, image compressor, client side tools, web tools directory, no server upload, privacy first tools" />
+    <meta name="author" content="ToolsBay" />
+    <meta name="publisher" content="ToolsBay" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Multilingual hreflang Alternate Tags -->
+    {SUPPORTED_LANGUAGES.map((lang) => (
+      <link rel="alternate" hreflang={lang.code} href={`https://toolsbay.github.io${lang.path === '/' ? '/' : lang.path + '/'}`} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href="https://toolsbay.github.io/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://toolsbay.github.io/og-image.png" />
+    <meta property="og:image:secure_url" content="https://toolsbay.github.io/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="ToolsBay - 55+ Free Zero-Server Browser Tools & Utilities" />
+    <meta property="og:site_name" content="ToolsBay" />
+    <meta property="og:locale" content={currentLang === 'en' ? 'en_US' : currentLang} />
+
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content="https://toolsbay.github.io/og-image.png" />
+    <meta property="twitter:image:alt" content="ToolsBay - 55+ Free Zero-Server Browser Tools & Utilities" />
+
+    <!-- Typography: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- JSON-LD Schemas -->
+    <script type="application/ld+json" set:html={JSON.stringify(siteSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+    <!-- Slot for Page-Specific Schemas (ItemList, FAQPage) -->
+    <slot name="schema" />
+  </head>
+
+  <body class="min-h-screen flex flex-col bg-sand-50 dark:bg-dark-bg text-neutral-900 dark:text-neutral-100 selection:bg-sand/40 selection:text-neutral-900">
+    <!-- Skip to Content for Accessibility -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2.5 focus:bg-moss focus:text-white focus:rounded-xl focus:shadow-xl focus:font-semibold focus:outline-none focus:ring-2 focus:ring-sand"
+    >
+      Skip to main content
+    </a>
+
+    <Navbar currentLang={currentLang} />
+    
+    <div id="main-content" class="flex-grow">
+      <slot />
+    </div>
+
+    <Footer currentLang={currentLang} />
+  </body>
+</html>

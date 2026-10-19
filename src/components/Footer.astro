@@ -1,0 +1,66 @@
+---
+import { translations } from '../i18n/translations';
+
+interface Props {
+  currentLang?: string;
+}
+
+const { currentLang = 'en' } = Astro.props;
+const t = translations[currentLang] || translations.en;
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="mt-20 border-t border-light-border dark:border-dark-border bg-white/60 dark:bg-dark-surface/60 backdrop-blur-sm transition-colors duration-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+      
+      <!-- Brand & Mission Statement -->
+      <div class="flex flex-col items-center md:items-start gap-2">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-lg bg-moss flex items-center justify-center text-sand shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+            </svg>
+          </div>
+          <span class="font-bold text-neutral-900 dark:text-neutral-50 text-base">ToolsBay</span>
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-sand/30 dark:bg-sand/15 text-olive-800 dark:text-sand">
+            {t.badge55}
+          </span>
+        </div>
+        <p class="text-xs text-neutral-500 dark:text-neutral-400 max-w-md">
+          {t.privacyPill} • 100% client-side privacy-first browser tools suite.
+        </p>
+      </div>
+
+      <!-- Developer Support CTA & Links -->
+      <div class="flex flex-col sm:flex-row items-center gap-4">
+        <a
+          href="https://ko-fi.com/kishara"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-gradient-to-r from-sand to-sand-400 hover:from-sand-400 hover:to-sand text-neutral-900 text-xs font-bold transition-all shadow-sm hover:shadow-glow-sand border border-sand-400/40"
+          title="Support the Developer"
+        >
+          <span class="text-base leading-none">☕</span>
+          <span>{t.supportDev}</span>
+        </a>
+
+        <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-neutral-100 dark:bg-dark-card text-neutral-600 dark:text-neutral-400 text-xs font-mono">
+          <span class="w-2 h-2 rounded-full bg-sage"></span>
+          <span>zero servers • zero telemetry</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Copyright Sub-bar -->
+    <div class="mt-8 pt-6 border-t border-light-border/60 dark:border-dark-border/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-neutral-400 dark:text-neutral-500">
+      <p>&copy; {currentYear} {t.footerRights}</p>
+      <div class="flex items-center gap-4">
+        <a href="#main-content" class="hover:text-moss dark:hover:text-sand transition-colors">
+          Back to Top ↑
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
