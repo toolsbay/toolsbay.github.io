@@ -183,7 +183,7 @@ export const ToolDirectory: React.FC<ToolDirectoryProps> = ({ currentLang = 'en'
         </div>
 
         <div
-          className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0"
+          className="flex flex-wrap items-center gap-2 sm:gap-2.5"
           role="tablist"
           aria-label="Tool Categories"
         >
@@ -199,19 +199,19 @@ export const ToolDirectory: React.FC<ToolDirectoryProps> = ({ currentLang = 'en'
                 role="tab"
                 aria-selected={isSelected}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all duration-200 border cursor-pointer select-none shrink-0 ${
+                className={`inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 border cursor-pointer select-none ${
                   isSelected
-                    ? 'bg-moss text-white border-moss shadow-sm dark:bg-sand dark:text-neutral-900 dark:border-sand'
-                    : 'bg-white dark:bg-dark-surface text-neutral-700 dark:text-neutral-300 border-light-border dark:border-dark-border hover:border-moss/40 dark:hover:border-sand/40 hover:bg-sand-50/60 dark:hover:bg-dark-hover'
+                    ? 'bg-moss text-white border-moss shadow-sm dark:bg-sand dark:text-neutral-950 dark:border-sand dark:font-bold'
+                    : 'bg-white dark:bg-dark-surface text-neutral-700 dark:text-neutral-200 border-light-border dark:border-dark-border hover:border-moss/40 dark:hover:border-sand/50 dark:hover:text-sand hover:bg-sand-50/60 dark:hover:bg-dark-hover'
                 }`}
               >
-                <span className="text-sm">{cat.icon}</span>
+                <span className="text-sm leading-none">{cat.icon}</span>
                 <span>{categoryLabel}</span>
                 <span
-                  className={`text-[10px] px-1.5 py-0.5 rounded-full font-mono font-bold ${
+                  className={`text-[10px] px-1.5 py-0.5 rounded-full font-mono font-bold transition-colors ${
                     isSelected
-                      ? 'bg-black/20 dark:bg-black/15 text-white dark:text-neutral-900'
-                      : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400'
+                      ? 'bg-black/20 text-white dark:bg-black/25 dark:text-neutral-950'
+                      : 'bg-neutral-100 dark:bg-dark-card text-neutral-600 dark:text-neutral-300'
                   }`}
                 >
                   {count}
@@ -351,7 +351,7 @@ const ToolCardItem: React.FC<ToolCardItemProps> = ({
                   {tool.name}
                 </a>
               </h4>
-              <span className="text-[11px] font-medium text-olive-600 dark:text-olive-300">
+              <span className="text-[11px] font-semibold text-olive-700 dark:text-sand/90">
                 {t.categories[tool.category]}
               </span>
             </div>
@@ -391,7 +391,7 @@ const ToolCardItem: React.FC<ToolCardItemProps> = ({
         {/* Description */}
         <p
           id={`tool-desc-${tool.id}`}
-          className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2 leading-relaxed mb-4"
+          className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 line-clamp-2 leading-relaxed mb-4"
         >
           {description}
         </p>
@@ -405,7 +405,7 @@ const ToolCardItem: React.FC<ToolCardItemProps> = ({
               {tool.badge}
             </span>
           )}
-          <span className="text-[10px] font-mono text-neutral-400 dark:text-neutral-500">
+          <span className="text-[10px] font-mono text-neutral-400 dark:text-neutral-400">
             zero-server
           </span>
         </div>
