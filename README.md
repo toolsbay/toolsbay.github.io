@@ -66,7 +66,7 @@ ToolsBay supports 7 global languages using Astro static subpath routing and pre-
 
 ---
 
-## 🗂️ Complete Tools Catalog (63 Utilities)
+## 🗂️ Complete Tools Catalog (65 Utilities)
 
 ### 🎬 Video & Audio
 | Tool Name | URL | Core Functionality |
@@ -85,6 +85,7 @@ ToolsBay supports 7 global languages using Astro static subpath routing and pre-
 | **VideoToAudio** | [video-to-audio.github.io](https://video-to-audio.github.io/) | Extract MP3/WAV audio tracks from video files. |
 | **VideoToJPG** | [videotojpg.github.io](https://videotojpg.github.io/) | Extract high-resolution image frames from any video. |
 | **VoiceTake** | [voicetake.github.io](https://voicetake.github.io/) | Record high-quality voiceovers and edit audio like text. |
+| **PodEditor** | [podeditor.github.io](https://podeditor.github.io/) | Zero-server podcast audio editor with auto silence stripper and vocal clarity master. |
 
 ### 🖼️ Image & Design
 | Tool Name | URL | Core Functionality |
@@ -150,6 +151,7 @@ ToolsBay supports 7 global languages using Astro static subpath routing and pre-
 | **SLGovIQ** | [slgoviq.github.io](https://slgoviq.github.io/) | Multilingual competitive exam IQ and aptitude practice. |
 | **Kendaraya** | [kendaraya.github.io](https://kendaraya.github.io/) | Traditional chart and horoscopic utility. |
 | **FreeToolsOnline** | [freetools-online.github.io](https://freetools-online.github.io/) | Companion web utilities portal. |
+| **ResponsiveViewer** | [responsive-viewer.github.io](https://responsive-viewer.github.io/) | Automated multi-device web responsiveness tester for localhost and live sites. |
 
 ---
 
@@ -157,12 +159,12 @@ ToolsBay supports 7 global languages using Astro static subpath routing and pre-
 
 ToolsBay achieves a verified **100/100 Technical SEO rating**:
 
-1. **Pre-Rendered Crawlable HTML**: All 63 tool cards render native `<a href="..." target="_blank" rel="noopener noreferrer">` in the initial server-generated HTML so Googlebot effortlessly indexes and passes PageRank authority across the network.
+1. **Pre-Rendered Crawlable HTML**: All 65 tool cards render native `<a href="..." target="_blank" rel="noopener noreferrer">` in the initial server-generated HTML so Googlebot effortlessly indexes and passes PageRank authority across the network.
 2. **Quad-Layer JSON-LD Structured Data**:
    - `WebSite` with `potentialAction` (`SearchAction`) for Sitelinks Search Box eligibility.
    - `Organization` declaring publisher ownership, logo, and founder credentials.
    - `BreadcrumbList` providing search result navigational trails (`ToolsBay › Free Browser Tools`).
-   - `ItemList` detailing all 63 items as `SoftwareApplication` with `$0.00 USD` offers.
+   - `ItemList` detailing all 65 items as `SoftwareApplication` with `$0.00 USD` offers.
    - `FAQPage` answering privacy, client-side, and security queries for SERP accordion carousels.
 3. **Automated XML Sitemaps**: Pre-rendered `sitemap-index.xml` and `sitemap-0.xml` featuring bidirectional `xhtml:link` hreflang cross-references across all 7 locales.
 4. **Social Sharing**: Verified `1200×630` physical `og-image.png` with complete Open Graph and Twitter Card tags.
@@ -186,7 +188,7 @@ toolsbay.github.io/
 │   │   ├── Navbar.astro        # Sticky top bar with 7-lang selector
 │   │   └── ToolDirectory.tsx   # React Island: instant search & pinned shelf
 │   ├── data/
-│   │   └── toolsCatalog.ts     # 63 categorized tools data registry
+│   │   └── toolsCatalog.ts     # 65 categorized tools data registry
 │   ├── i18n/
 │   │   └── translations.ts     # Typed dictionaries for en, es, pt, de, fr, ja, zh
 │   ├── layouts/

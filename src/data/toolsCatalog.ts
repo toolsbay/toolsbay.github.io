@@ -12,7 +12,7 @@ export interface ToolItem {
 
 export const TOOLS_CATALOG: ToolItem[] = [
   // ==========================================
-  // 🎬 Video & Audio (14 tools)
+  // 🎬 Video & Audio (15 tools)
   // ==========================================
   {
     id: 'audio-cutter',
@@ -255,6 +255,24 @@ export const TOOLS_CATALOG: ToolItem[] = [
       fr: 'Enregistrez des voix off haute qualité et mémos vocaux.',
       ja: '高音質ボイスレコーディングと音声メモの保存ツール。',
       zh: '录制高清语音旁白、播客随记与口述备忘录。'
+    }
+  },
+  {
+    id: 'podeditor',
+    name: 'PodEditor',
+    url: 'https://podeditor.github.io/',
+    desc: 'Zero-server podcast audio editor with auto silence stripper and vocal clarity master.',
+    category: 'video_and_audio',
+    tags: ['podcast', 'audio', 'silence', 'voice', 'editor', 'mp3', 'wav', 'mastering', 'vocal', 'cut'],
+    icon: 'Headphones',
+    badge: 'New',
+    localizedDesc: {
+      es: 'Editor de podcasts sin servidor con eliminación automática de silencios y ecualización de voz.',
+      pt: 'Editor de podcasts sem servidor com remoção automática de pausas e masterização vocal.',
+      de: 'Serverloser Podcast-Audioeditor mit automatischer Stille-Entfernung und Stimm-Mastering.',
+      fr: 'Éditeur de podcast sans serveur avec suppression automatique des silences et mastering vocal.',
+      ja: '無音区間の自動カットと高音質ボーカルマスタリングを備えたポッドキャスト編集ツール。',
+      zh: '零服务器播客音频编辑器，支持智能自动静音消除与专业人声母带优化。'
     }
   },
 
@@ -828,7 +846,7 @@ export const TOOLS_CATALOG: ToolItem[] = [
   },
 
   // ==========================================
-  // 💻 Dev & Finance (17 tools)
+  // 💻 Dev & Finance (18 tools)
   // ==========================================
   {
     id: 'clone-link',
@@ -1124,6 +1142,24 @@ export const TOOLS_CATALOG: ToolItem[] = [
       fr: 'Portail complémentaire d\'outils et utilitaires web.',
       ja: '相互連携する姉妹Webツール総合ポータル。',
       zh: '互联互通的姐妹站综合 Web 在线实用工具中心。'
+    }
+  },
+  {
+    id: 'responsive-viewer',
+    name: 'ResponsiveViewer',
+    url: 'https://responsive-viewer.github.io/',
+    desc: 'Automated multi-device web responsiveness tester for localhost and live sites.',
+    category: 'dev_finance_and_utility',
+    tags: ['responsive', 'viewport', 'mobile', 'preview', 'developer', 'tester', 'screen', 'localhost', 'devices'],
+    icon: 'Smartphone',
+    badge: 'New',
+    localizedDesc: {
+      es: 'Probador automatizado de diseño adaptable multidispositivo para localhost y sitios web en vivo.',
+      pt: 'Testador automatizado de responsividade web multidispositivo para localhost e sites online.',
+      de: 'Automatisierter Multi-Device-Web-Responsiveness-Tester für Localhost und Live-Websites.',
+      fr: 'Testeur automatisé de réactivité web multi-écrans pour localhost et sites en direct.',
+      ja: 'ローカルホストおよび公開サイトを複数デバイスで自動プレビュー検証できるレスポンシブテスター。',
+      zh: '支持本地 Localhost 与线上网站的多设备屏幕自适应自动化响应式测试工具。'
     }
   }
 ];
