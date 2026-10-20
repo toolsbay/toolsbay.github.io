@@ -1,0 +1,17 @@
+{
+  "name": "ToolsBay",
+  "short_name": "ToolsBay",
+  "description": "55+ Free Zero-Server Browser Tools & Utilities",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF9F5",
+  "theme_color": "#6A795D",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
